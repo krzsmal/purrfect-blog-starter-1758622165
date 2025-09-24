@@ -132,13 +132,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202509240835412_InitialCreate.cs" />
-    <Compile Include="Migrations\202509240835412_InitialCreate.Designer.cs">
-      <DependentUpon>202509240835412_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202509241129028_UpdateBlogPostModel.cs" />
-    <Compile Include="Migrations\202509241129028_UpdateBlogPostModel.Designer.cs">
-      <DependentUpon>202509241129028_UpdateBlogPostModel.cs</DependentUpon>
+    <Compile Include="Migrations\202509241729164_InitialCreate.cs" />
+    <Compile Include="Migrations\202509241729164_InitialCreate.Designer.cs">
+      <DependentUpon>202509241729164_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogDbContext.cs" />
@@ -230,11 +226,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202509240835412_InitialCreate.resx">
-      <DependentUpon>202509240835412_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202509241129028_UpdateBlogPostModel.resx">
-      <DependentUpon>202509241129028_UpdateBlogPostModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202509241729164_InitialCreate.resx">
+      <DependentUpon>202509241729164_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

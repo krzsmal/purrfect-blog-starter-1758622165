@@ -14,11 +14,17 @@ namespace PurrfectBlog.Models
         {
             modelBuilder.Entity<BlogPost>()
                 .Property(b => b.Title)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             modelBuilder.Entity<BlogPost>()
                 .Property(b => b.Content)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(5000);
+
+            modelBuilder.Entity<BlogPost>()
+                .Property(b => b.Category)
+                .HasMaxLength(50);
 
             base.OnModelCreating(modelBuilder);
         }

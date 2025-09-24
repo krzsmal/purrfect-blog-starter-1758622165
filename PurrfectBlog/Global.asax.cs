@@ -20,8 +20,7 @@ namespace PurrfectBlog
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // Initialize database
-            Database.SetInitializer(new CreateDatabaseIfNotExists<BlogDbContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BlogDbContext, PurrfectBlog.Migrations.Configuration>());
         }
     }
 }
