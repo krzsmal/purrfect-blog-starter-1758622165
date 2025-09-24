@@ -136,6 +136,10 @@
     <Compile Include="Migrations\202509240835412_InitialCreate.Designer.cs">
       <DependentUpon>202509240835412_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202509241129028_UpdateBlogPostModel.cs" />
+    <Compile Include="Migrations\202509241129028_UpdateBlogPostModel.Designer.cs">
+      <DependentUpon>202509241129028_UpdateBlogPostModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BlogDbContext.cs" />
     <Compile Include="Models\BlogPost.cs" />
@@ -191,6 +195,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\BlogPost\CreatePost.cshtml" />
+    <Content Include="Views\BlogPost\Index.cshtml" />
+    <Content Include="Views\BlogPost\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -225,6 +232,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202509240835412_InitialCreate.resx">
       <DependentUpon>202509240835412_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509241129028_UpdateBlogPostModel.resx">
+      <DependentUpon>202509241129028_UpdateBlogPostModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

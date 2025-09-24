@@ -18,12 +18,11 @@ footer {
     text-align: center;
 }
 
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .dl-horizontal dt {
     white-space: normal;
+}
+
+#title {
+    font-size: 3rem;
+    font-weight: bold;
 }

@@ -1,0 +1,47 @@
+﻿@model PurrfectBlog.Models.BlogPost
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<main aria-labelledby="post-title">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="jumbotron text-center mb-4">
+        <h2 id="title" class="mb-1">@Html.DisplayFor(m => m.Title)</h2>
+        <p class="lead">
+            Published on @Model.CreatedAt.ToString("dd MMMM, yyyy 'at' hh:mm tt")
+            @if (!string.IsNullOrWhiteSpace(Model.Category))
+            {
+                @: · Category:
+                <span class="badge bg-info text-dark">@Model.Category</span>
+            }
+        </p>
+        <div class="mt-3">
+            <a class="btn btn-primary btn-lg m-2" href="@Url.Action("Index", "BlogPost")">
+                View Posts
+            </a>
+            <a class="btn btn-success btn-lg m-2" href="@Url.Action("CreatePost", "BlogPost")">
+                Write Post
+            </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-10 col-lg-8">
+            <article class="card shadow-sm">
+                <div class="card-body">
+                    <div class="post-content mx-auto" style="font-size: 1.1rem;">
+                        @Html.Raw(Model.Content.Replace("\n", "<br />"))
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</main>
