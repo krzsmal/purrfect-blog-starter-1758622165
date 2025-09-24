@@ -1,0 +1,56 @@
+﻿@model PurrfectBlog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Create New Post";
+}
+
+<main aria-labelledby="title">
+    <div class="jumbotron text-center mb-4">
+        <h2 id="title">@ViewBag.Title</h2>
+        <p class="lead">Share your amazing cat story with the world!</p>
+        <div class="mt-4">
+            <a class="btn btn-primary btn-lg m-2" href="@Url.Action("Index", "BlogPost")">
+                View Posts
+            </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            @using (Html.BeginForm("CreatePost", "BlogPost", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "form-label fw-bold" })
+                    @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter a catchy title..." } })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(m => m.Category, new { @class = "form-label fw-bold mb-0" })
+                    @Html.EditorFor(m => m.Category, new { htmlAttributes = new { @class = "form-control", placeholder = "e.g. Funny, Heartwarming, Tips (optional)" } })
+                    @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group mt-2">
+                    @Html.LabelFor(m => m.Content, new { @class = "form-label fw-bold  mb-0" })
+                    @Html.TextAreaFor(m => m.Content, 8, 50, new { @class = "form-control", placeholder = "Tell us your cat story..." })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg m-2">
+                        <i class="bi bi-pencil"></i> Publish Post
+                    </button>
+                    @Html.ActionLink("Cancel", "Index", "BlogPost", null, new { @class = "btn btn-outline-secondary btn-lg m-2" })
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

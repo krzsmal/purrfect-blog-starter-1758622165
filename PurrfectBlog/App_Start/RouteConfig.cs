@@ -13,6 +13,13 @@ namespace PurrfectBlog
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Custom route for /CreatePost
+            routes.MapRoute(
+                name: "CreatePost",
+                url: "CreatePost",
+                defaults: new { controller = "BlogPost", action = "CreatePost" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
