@@ -19,8 +19,8 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("All Posts", "Index", "BlogPost", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Write Post", "CreatePost", "BlogPost", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li><a href="/Posts" class="nav-link">All Posts</a></li>
+                    <li><a href="/CreatePost" class="nav-link">Write Post</a></li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
@@ -28,11 +28,13 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Purrfect Blog</p>
-        </footer>
     </div>
+
+    <footer class="text-center py-3 mt-auto border-top">
+        <div class="container">
+            <p class="mb-0">&copy; @DateTime.Now.Year - Purrfect Blog</p>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
