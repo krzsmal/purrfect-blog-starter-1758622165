@@ -26,3 +26,17 @@ footer {
     font-size: 3rem;
     font-weight: bold;
 }
+
+/* Sticky footer */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container.body-content {
+    flex: 1;
+}

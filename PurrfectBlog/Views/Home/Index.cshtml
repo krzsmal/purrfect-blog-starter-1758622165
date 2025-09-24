@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<PurrfectBlog.Models.BlogPost>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,14 +10,57 @@
         Your ultimate destination for cat-related stories and adventures!
     </p>
     <div class="mt-4">
-        <a class="btn btn-primary btn-lg m-2" href="@Url.Action("CreatePost", "BlogPost")">
+        <a class="btn btn-success btn-lg m-2" href="/CreatePost">
             Add Post
         </a>
-        <a class="btn btn-success btn-lg m-2" href="@Url.Action("Index", "BlogPost")">
+        <a class="btn btn-primary btn-lg m-2" href="/Posts">
             View Posts
         </a>
     </div>
 </div>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center mb-4">Latest Cat Stories</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            @foreach (var post in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <a href="/Posts/@post.Id" class="text-decoration-none">@post.Title</a>
+                            </h5>
+                            <p class="text-muted mb-2">
+                                <small>
+                                    @post.CreatedAt.ToString("dd MMM, yyyy")
+                                    @if (!string.IsNullOrWhiteSpace(post.Category))
+                                    {
+                                        @: · <span class="badge bg-info text-dark">@post.Category</span>
+                                    }
+                                </small>
+                            </p>
+                            <p class="card-text flex-grow-1">
+                                @{
+                                    var preview = post.Content.Length > 120 ? post.Content.Substring(0, 120) + "..." : post.Content;
+                                }
+                                @preview
+                            </p>
+                            <div class="mt-auto">
+                                <a href="/Posts/@post.Id" class="btn btn-outline-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <div class="row">
     <div class="col-md-4">
