@@ -19,8 +19,8 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li><a href="/Posts" class="nav-link">All Posts</a></li>
-                    <li><a href="/CreatePost" class="nav-link">Write Post</a></li>
+                    <li><a href="@Url.Action("Index", "BlogPost")" class="nav-link">All Posts</a></li>
+                    <li><a href="@Url.Action("CreatePost", "BlogPost")" class="nav-link">Write Post</a></li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
