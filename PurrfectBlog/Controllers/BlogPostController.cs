@@ -22,7 +22,8 @@ namespace PurrfectBlog.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                Response.StatusCode = 400;
+                return View("~/Views/Error/BadRequest.cshtml");
             }
 
             BlogPost blogPost = db.BlogPosts.Find(id);
@@ -64,7 +65,8 @@ namespace PurrfectBlog.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                Response.StatusCode = 400;
+                return View("~/Views/Error/BadRequest.cshtml");
             }
 
             BlogPost blogPost = db.BlogPosts.Find(id);
