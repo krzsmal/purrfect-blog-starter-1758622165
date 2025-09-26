@@ -1,13 +1,15 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET Framework 4.7 CI
+name: Build and Test
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
 
 jobs:
   build:
@@ -19,11 +21,41 @@ jobs:
       - name: Setup NuGet
         uses: nuget/setup-nuget@v2
 
-      - name: Setup MSBuild
+      - name: Setup MSBuild (VS2022)
         uses: microsoft/setup-msbuild@v2
+        with:
+          msbuild-architecture: x86
 
-      - name: Restore NuGet packages
+      - name: Restore
         run: nuget restore "PurrfectBlog/PurrfectBlog.sln"
 
-      - name: Build solution
+      - name: Build (Release)
         run: msbuild "PurrfectBlog/PurrfectBlog.sln" /p:Configuration=Release /m
+
+      - name: Run tests (VSTest)
+        shell: pwsh
+        run: |
+          $testDll = Resolve-Path 'PurrfectBlog.Tests/bin/Release/PurrfectBlog.Tests.dll'
+          $vstest = 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\TestPlatform\vstest.console.exe'
+          New-Item -ItemType Directory -Force -Path TestResults | Out-Null
+          & "$vstest" $testDll /Logger:"trx;LogFileName=MSTest.trx" /ResultsDirectory:"$PWD\TestResults"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trx-results
+          path: TestResults/**/*.trx
+          if-no-files-found: warn
+
+      - name: Publish test results
+        uses: dorny/test-reporter@v1
+        with:
+          name: MSTest Results
+          reporter: dotnet-trx
+          path: '**/TestResults/*.trx'
+          list-suites: all
+          list-tests: all
+          max-annotations: 10
+          fail-on-error: false
+          fail-on-empty: true
+          only-summary: false
