@@ -28,7 +28,8 @@ namespace PurrfectBlog.Controllers
             BlogPost blogPost = db.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
             }
 
             return View(blogPost);
@@ -69,7 +70,8 @@ namespace PurrfectBlog.Controllers
             BlogPost blogPost = db.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
             }
 
             return View(blogPost);
@@ -100,7 +102,8 @@ namespace PurrfectBlog.Controllers
             BlogPost blogPost = db.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
             }
 
             db.BlogPosts.Remove(blogPost);
