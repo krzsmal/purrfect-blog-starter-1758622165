@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Error - Purrfect Blog";
+}
+
+<div class="p-5 rounded-3 text-center mb-4">
+    <h1 id="title" class="display-1">⚠️</h1>
+    <h2 class="mb-3">Oops! Something Went Wrong</h2>
+    <p class="lead">
+        An unexpected error occurred. Don't worry, even the best cats knock things over! 🐾
+    </p>
+    <div class="mt-4">
+        <a class="btn btn-primary btn-lg m-2" href="@Url.Action("Index", "Home")">
+            Go Home
+        </a>
+        <a class="btn btn-success btn-lg m-2" href="@Url.Action("Index", "BlogPost")">
+            Browse Posts
+        </a>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <h5 class="card-title">What can you do?</h5>
+                <p class="text-muted">We're sorry for the inconvenience. Here are some options:</p>
+                <div class="row mt-3">
+                    <div class="col-md-6 mb-3">
+                        <h6>🔄 Refresh Page</h6>
+                        <p class="small text-muted">Try refreshing the page</p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h6>🏠 Start Over</h6>
+                        <p class="small text-muted">Go back to the homepage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

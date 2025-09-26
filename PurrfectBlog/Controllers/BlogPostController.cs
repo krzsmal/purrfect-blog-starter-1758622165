@@ -22,13 +22,15 @@ namespace PurrfectBlog.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                Response.StatusCode = 400;
+                return View("~/Views/Error/BadRequest.cshtml");
             }
 
             BlogPost blogPost = db.BlogPosts.Find(id);
             if (blogPost == null)
             {
-                return HttpNotFound();
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
             }
 
             return View(blogPost);
@@ -56,6 +58,61 @@ namespace PurrfectBlog.Controllers
             }
 
             return View(blogPost);
+        }
+
+        // GET: BlogPost/EditPost/5
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                Response.StatusCode = 400;
+                return View("~/Views/Error/BadRequest.cshtml");
+            }
+
+            BlogPost blogPost = db.BlogPosts.Find(id);
+            if (blogPost == null)
+            {
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
+            }
+
+            return View(blogPost);
+        }
+
+        // POST: BlogPost/EditPost/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost([Bind(Include = "Id,Title,Content,Category,CreatedAt")] BlogPost blogPost)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(blogPost).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Your blog post has been updated successfully!";
+                return RedirectToAction("Details", new { id = blogPost.Id });
+            }
+
+            return View(blogPost);
+        }
+
+        // POST: BlogPost/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            BlogPost blogPost = db.BlogPosts.Find(id);
+            if (blogPost == null)
+            {
+                Response.StatusCode = 404;
+                return View("~/Views/Error/NotFound.cshtml");
+            }
+
+            db.BlogPosts.Remove(blogPost);
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = "Blog post has been deleted successfully!";
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

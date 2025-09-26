@@ -5,9 +5,17 @@
 }
 
 <main aria-labelledby="title">
-    <div class="jumbotron text-center mb-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="p-5 rounded-3 text-center mb-4">
         <h2 id="title">@ViewBag.Title</h2>
-        <p class="lead">Discover amazing cat stories</p>
+        <p class="lead">Discover amazing cat stories 🐾</p>
         <div class="mt-4">
             <a class="btn btn-success btn-lg m-2" href="@Url.Action("CreatePost", "BlogPost")">
                 Write New Post
@@ -38,7 +46,7 @@
                                     @if (!string.IsNullOrWhiteSpace(post.Category))
                                     {
                                         @: ·
-                                        <span class="badge badge-info bg-info text-dark align-middle">
+                                        <span class="badge bg-info text-dark align-middle">
                                             @post.Category
                                         </span>
                                     }
@@ -71,11 +79,8 @@
                     <div class="card-body text-center">
                         <h4 class="card-title mb-2">No posts yet!</h4>
                         <p class="card-text mb-3">
-                            Be the first to share a cat story.
+                            Be the first to share a cat story. 😸
                         </p>
-                        <a class="btn btn-success btn-lg" href="@Url.Action("CreatePost", "BlogPost")">
-                            Create your first post
-                        </a>
                     </div>
                 </div>
             </div>

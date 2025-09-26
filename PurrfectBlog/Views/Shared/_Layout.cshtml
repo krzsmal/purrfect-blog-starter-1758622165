@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("Purrfect Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -19,8 +19,8 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li><a href="/Posts" class="nav-link">All Posts</a></li>
-                    <li><a href="/CreatePost" class="nav-link">Write Post</a></li>
+                    <li><a href="@Url.Action("Index", "BlogPost")" class="nav-link">All Posts</a></li>
+                    <li><a href="@Url.Action("CreatePost", "BlogPost")" class="nav-link">Write Post</a></li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>

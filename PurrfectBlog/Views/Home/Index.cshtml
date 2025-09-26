@@ -4,16 +4,16 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron text-center mb-4">
+<div class="p-5 rounded-3 text-center mb-4">
     <h1 id="title">Welcome to Purrfect Blog</h1>
     <p class="lead">
-        Your ultimate destination for cat-related stories and adventures!
+        Your ultimate destination for cat-related stories and adventures! 🐾
     </p>
     <div class="mt-4">
-        <a class="btn btn-success btn-lg m-2" href="/CreatePost">
+        <a class="btn btn-success btn-lg m-2" href="@Url.Action("CreatePost", "BlogPost")">
             Add Post
         </a>
-        <a class="btn btn-primary btn-lg m-2" href="/Posts">
+        <a class="btn btn-primary btn-lg m-2" href="@Url.Action("Index", "BlogPost")">
             View Posts
         </a>
     </div>
@@ -34,7 +34,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">
-                                <a href="/Posts/@post.Id" class="text-decoration-none">@post.Title</a>
+                                <a href="@Url.Action("Details", "BlogPost", new { id = post.Id })" class="text-decoration-none">@post.Title</a>
                             </h5>
                             <p class="text-muted mb-2">
                                 <small>
@@ -52,7 +52,7 @@
                                 @preview
                             </p>
                             <div class="mt-auto">
-                                <a href="/Posts/@post.Id" class="btn btn-outline-primary btn-sm">Read More</a>
+                                <a href="@Url.Action("Details", "BlogPost", new { id = post.Id })" class="btn btn-outline-primary btn-sm">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -64,19 +64,19 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Share Stories</h2>
+        <h2>📝 Share Stories</h2>
         <p>
             Write and share your favorite cat stories with fellow cat lovers around the world.
         </p>
     </div>
     <div class="col-md-4">
-        <h2>Connect</h2>
+        <h2>🤝 Connect</h2>
         <p>
             Connect with other cat enthusiasts and discover amazing feline adventures.
         </p>
     </div>
     <div class="col-md-4">
-        <h2>Inspire</h2>
+        <h2>💝 Inspire</h2>
         <p>
             Get inspired by heartwarming tales and funny moments with our furry friends.
         </p>

@@ -13,6 +13,14 @@ namespace PurrfectBlog
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Custom route for edit post: /EditPost/{id}
+            routes.MapRoute(
+                name: "EditPost",
+                url: "EditPost/{id}",
+                defaults: new { controller = "BlogPost", action = "EditPost" },
+                constraints: new { id = @"\d+" }
+            );
+
             // Custom route for individual post /Posts/{id}
             routes.MapRoute(
                 name: "PostDetails",
