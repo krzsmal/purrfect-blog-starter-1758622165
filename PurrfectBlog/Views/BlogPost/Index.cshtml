@@ -13,7 +13,7 @@
         </div>
     }
 
-    <div class="jumbotron text-center mb-4">
+    <div class="p-5 rounded-3 text-center mb-4">
         <h2 id="title">@ViewBag.Title</h2>
         <p class="lead">Discover amazing cat stories 🐾</p>
         <div class="mt-4">
@@ -46,7 +46,7 @@
                                     @if (!string.IsNullOrWhiteSpace(post.Category))
                                     {
                                         @: ·
-                                        <span class="badge badge-info bg-info text-dark align-middle">
+                                        <span class="badge bg-info text-dark align-middle">
                                             @post.Category
                                         </span>
                                     }
