@@ -70,12 +70,14 @@ jobs:
         shell: pwsh
         run: |
           mkdir drop | Out-Null
+          $pkg = Join-Path $env:GITHUB_WORKSPACE 'drop\purrfectblog.zip'
           msbuild "PurrfectBlog\PurrfectBlog.csproj" `
+            /t:Package `
             /p:Configuration=Release `
             /p:WebPublishMethod=Package `
             /p:PackageAsSingleFile=true `
             /p:SkipInvalidConfigurations=true `
-            /p:PackageLocation="$(pwd)\drop\purrfectblog.zip"
+            /p:PackageLocation="$pkg"
 
       - name: Upload deploy artifact
         uses: actions/upload-artifact@v4
