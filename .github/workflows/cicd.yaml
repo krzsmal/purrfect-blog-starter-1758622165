@@ -1,10 +1,16 @@
-name: Build and Test
+name: CI/CD
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy to App Service after build?'
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -12,9 +18,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
+  build_test:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -40,7 +45,8 @@ jobs:
           New-Item -ItemType Directory -Force -Path TestResults | Out-Null
           & "$vstest" $testDll /Logger:"trx;LogFileName=MSTest.trx" /ResultsDirectory:"$PWD\TestResults"
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload TRX results artifact
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: trx-results
@@ -59,3 +65,44 @@ jobs:
           fail-on-error: false
           fail-on-empty: true
           only-summary: false
+      
+      - name: Create Web Deploy package
+        shell: pwsh
+        run: |
+          mkdir drop | Out-Null
+          msbuild "PurrfectBlog\PurrfectBlog.csproj" `
+            /p:Configuration=Release `
+            /p:WebPublishMethod=Package `
+            /p:PackageAsSingleFile=true `
+            /p:SkipInvalidConfigurations=true `
+            /p:PackageLocation="$(pwd)\drop\purrfectblog.zip"
+
+      - name: Upload deploy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: webdeploy
+          path: drop/purrfectblog.zip
+          if-no-files-found: error
+  
+  deploy:
+    needs: build_test
+    if: |
+      github.ref == 'refs/heads/main' &&
+      (
+        github.event_name == 'push' ||
+        (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy == 'true')
+      )
+    runs-on: windows-latest
+    steps:
+      - name: Download deploy artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: webdeploy
+          path: drop
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: purrfectblog
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: drop/purrfectblog.zip
